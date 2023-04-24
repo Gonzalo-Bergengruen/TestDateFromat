@@ -1,4 +1,6 @@
-﻿namespace TestDateFormat;
+﻿using System;
+
+namespace TestDateFormat;
 
 /// <summary>
 /// Esta clase implementa la funcionalidad de cambiar el formato de una fecha.
@@ -13,8 +15,28 @@ public class DateFormatter
     /// </summary>
     /// <param name="date">Una fecha en formato "dd/mm/yyyy".</param>
     /// <returns>La fecha convertida al formato "yyyy-mm-dd".</returns>
+    
+    public static bool DiaValido(string date)
+    {
+        if (Int32.Parse(date.Substring(0, 2)) > 0 && Int32.Parse(date.Substring(0, 2)) <= 31 &&
+            Int32.Parse(date.Substring(3, 2)) > 0 && Int32.Parse(date.Substring(3, 2)) <= 12 &&
+            Int32.Parse(date.Substring(6)) > 0)
+        {
+            return true;
+        } else{
+            return false;
+        }
+    }
     public static string ChangeFormat(string date)
     {
-        return date.Substring(6) + "-" + date.Substring(3, 2) + "-" + date.Substring(0, 2);
+        if (String.IsNullOrEmpty(date))
+        {
+            return "Error: fecha vacía.";
+        } else if (DiaValido(date) == false)
+        {
+            return "Error: fecha invalida.";
+        } else {
+            return date.Substring(6) + "-" + date.Substring(3, 2) + "-" + date.Substring(0, 2);
+        }
     }
 }
