@@ -27,6 +27,16 @@ public class DateFormatter
             return false;
         }
     }
+
+    public static bool FormatoIncorrecto(string date)
+    {
+        if (date.Substring(2) != "/" || date.Substring(5) != "/")
+        {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public static string ChangeFormat(string date)
     {
         if (String.IsNullOrEmpty(date))
@@ -35,6 +45,9 @@ public class DateFormatter
         } else if (DiaValido(date) == false)
         {
             return "Error: fecha invalida.";
+        } else if (FormatoIncorrecto(date) == false)
+        {
+            return "Error: formato incorrecto.";
         } else {
             return date.Substring(6) + "-" + date.Substring(3, 2) + "-" + date.Substring(0, 2);
         }
